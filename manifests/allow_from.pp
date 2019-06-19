@@ -23,9 +23,31 @@
 #       'sshd_cfg_match_params' => Hash
 #   }
 define ssh::allow_from(
+    Array[ String ]         $pam_access_groups = [],
+    Array[ String ]         $pam_access_users = [],
     Array[ String, 1 ]      $hostlist,
     Hash[ String, Data, 1 ] $sshd_cfg_match_params,
 ) {
+
+    ### ACCESS.CONF
+    # This sets up the pam access.conf file to allow ssh
+    $pam_access_groups.each |String $pam_access_group| { $hostlist.each |String $host| {
+        pam_access::entry { "Allow $pam_access_group ssh from $host":
+            group      => $pam_access_group,
+            origin     => $host,
+            permission => '+',
+            position   => '-1',
+        }
+    }}
+
+    $pam_access_users.each |String $pam_access_user| { $hostlist.each |String $host| {
+        pam_access::entry { "Allow $pam_access_user ssh from $host":
+            user       => $pam_access_user,
+            origin     => $host,
+            permission => '+',
+            position   => '-1',
+        }
+    }}
 
     ### FIREWALL
     $hostlist.each | $host | {
