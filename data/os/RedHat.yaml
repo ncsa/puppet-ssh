@@ -1,0 +1,6 @@
+---
+ssh::sshd::required_packages:
+  - openssh-server
+ssh::sshd::revoked_keys_file: /etc/ssh/revoked_keys
+ssh::sshd::config:
+    UsePAM: 'yes'
