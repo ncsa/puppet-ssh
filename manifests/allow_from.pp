@@ -60,6 +60,15 @@ define ssh::allow_from(
     }
 
 
+    ### TCPWRAPPERS
+    $hostlist.each | $host | {
+        tcpwrappers::allow { "tcpwrappers allow SSH from host '${host}'":
+            service => 'sshd',
+            address => $host,
+        }
+    }
+
+
     ### SSHD
     # Defaults
     $config_defaults = {
