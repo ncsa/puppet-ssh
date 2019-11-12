@@ -22,14 +22,19 @@ Convenience classes for common ssh access patterns.
 
 ## Setup
 
-### What ssh affects **OPTIONAL**
+### What ssh affects
 
+* access.conf
 * firewall
 * sshd_config
+* sssd.conf
+* tcpwrappers
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
-* augeasproviders
+* https://forge.puppet.com/herculesteam/augeasproviders
+* https://github.com/raphink/puppet-augeasfacter
+  - Note: herculesteam/augeasfacter is broken
 
 ### Beginning with ssh
 
