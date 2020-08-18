@@ -1,3 +1,5 @@
+# DEPRECATED
+Use ncsa/puppet-sshd: http://github.com/ncsa/puppet-sshd
 
 # ssh
 
